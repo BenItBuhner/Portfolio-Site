@@ -4,19 +4,31 @@ import styles from "./Projects.module.css";
 const imgGroup36 = "/assets/group36.svg";
 
 const INTRO_TEXT =
-  "I am actively making and maintaining a few significant projects of mine, which make agents/LLMs more powerful and accessible to all! These show off my ability to write, scale, and make experiences like no other:";
+  "I build and ship open-source tools that make agents easier to run, watch, and trust, plus the apps I wanted for myself:";
 
 const PROJECTS = [
   {
-    title: "Athena Cloud Code Agent:",
+    title: "Cesium:",
     description:
-      "Architected a multi-agent orchestration system capable of long-horizon software engineering tasks. Can edit, test, debug, and iterate, file PRs for your autonomously.",
+      "A local-first AI workbench that runs every coding agent (Cursor, Codex, Claude Code, OpenCode, and its own) against real files and terminals, from desktop, phone, or watch.",
     subItems: [],
   },
   {
-    title: "Model Proxy & Claude Code Tunnel:",
+    title: "Murmur:",
     description:
-      "Built a resilient inference gateway that offers API key, provider, and model-level fallbacks. Forked and created a custom version for using any model with Claude Code easily.",
+      "Voice dictation for desktop and Android that turns speech into clean, formatted text wherever your cursor is.",
+    subItems: [],
+  },
+  {
+    title: "Mobile & MCP tooling:",
+    description:
+      "Cursor for Android, Codex Meter, Alarm MCP, and Cursor Cloud MCP: tools for running and watching agents from anywhere.",
+    subItems: [],
+  },
+  {
+    title: "Systems work:",
+    description:
+      "Zenium (Zen Browser's UX on Chromium) and AirDrop for Everything (a clean-room AirDrop protocol in Rust).",
     subItems: [],
   },
 ];

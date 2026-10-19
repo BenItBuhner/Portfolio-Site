@@ -35,8 +35,8 @@ export default function ProjectsPage() {
           </div>
           <div className={styles.projectsContent}>
             <p className={styles.introText}>
-              Here are some of the projects I&apos;ve worked on, ranging from AI and machine learning to distributed systems and web development.
-              Each project represents a unique challenge and learning opportunity.
+              Open-source tools I&apos;ve built and shipped: agent workbenches, voice dictation, mobile clients, MCP servers, a browser, and a from-scratch AirDrop stack.
+              Everything here is public on GitHub.
             </p>
 
             {/* Search Controls */}
