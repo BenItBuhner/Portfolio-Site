@@ -46,7 +46,7 @@ export default function FlipProfile() {
         </div>
         <div className={styles.flipCardBack}>
           <Image
-            src="/account-icon.png"
+            src="/profile-photo.jpg"
             alt="Bennett Buhner - Face"
             width={200}
             height={200}
