@@ -1,43 +1,42 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/app/page.module.css";
 
+// To change the photo, replace public/profile-photo.jpg (square, 600x600 or larger).
+const PHOTO_SRC = "/profile-photo.jpg";
+const FLIP_EVERY_MS = 4500;
+
 export default function FlipProfile() {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [flipped, setFlipped] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [photoFailed, setPhotoFailed] = useState(false);
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    // Add a temporary class to trigger the initial flip animation
-    el.classList.add(styles.initialFlip);
-
-    const handleAnimationEnd: EventListener = () => {
-      el.classList.remove(styles.initialFlip);
-    };
-
-    el.addEventListener("animationend", handleAnimationEnd);
-
-    // Safety: remove the class after 3s in case animationend doesn't fire
-    const timeout = setTimeout(() => {
-      handleAnimationEnd(new Event("animationend") as Event);
-    }, 3000);
-
-    return () => {
-      el.removeEventListener("animationend", handleAnimationEnd);
-      clearTimeout(timeout);
-    };
-  }, []);
+    if (paused || photoFailed) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setFlipped((f) => !f), FLIP_EVERY_MS);
+    return () => clearInterval(id);
+  }, [paused, photoFailed]);
 
   return (
-    <div ref={containerRef} className={styles.flipCard}>
-      <div className={styles.flipCardInner}>
+    <button
+      type="button"
+      className={styles.flipCard}
+      onClick={() => setFlipped((f) => !f)}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      aria-label="Flip profile picture"
+    >
+      <div
+        className={styles.flipCardInner}
+        style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+      >
         <div className={styles.flipCardFront}>
           <Image
             src="/account-icon.png"
-            alt="Bennett Buhner - Profile"
+            alt="Bennett Buhner logo"
             width={200}
             height={200}
             className={styles.profileImg}
@@ -45,16 +44,19 @@ export default function FlipProfile() {
           />
         </div>
         <div className={styles.flipCardBack}>
-          <Image
-            src="/profile-photo.jpg"
-            alt="Bennett Buhner - Face"
-            width={200}
-            height={200}
-            className={styles.profileImg}
-            priority
-          />
+          {!photoFailed && (
+            <Image
+              src={PHOTO_SRC}
+              alt="Bennett Buhner"
+              width={200}
+              height={200}
+              className={styles.profileImg}
+              onError={() => setPhotoFailed(true)}
+              priority
+            />
+          )}
         </div>
       </div>
-    </div>
+    </button>
   );
 }

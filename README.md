@@ -121,3 +121,13 @@ const TIMELINE: TimelineEntry[] = [
   // Add more entries...
 ];
 ```
+## Deploying to Cloudflare Workers
+
+The site runs on Cloudflare Workers through [OpenNext](https://opennext.js.org/cloudflare).
+
+- `npm run preview` builds and runs the site locally on the Workers runtime.
+- `npm run deploy` builds and deploys it (run `npx wrangler login` once first).
+
+Or connect the repo in the Cloudflare dashboard (Workers & Pages → Create → Import a repository) with build command `npx opennextjs-cloudflare build` and deploy command `npx opennextjs-cloudflare deploy`.
+
+To change the profile photo, replace `public/profile-photo.jpg` with a square image.

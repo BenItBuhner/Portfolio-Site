@@ -43,7 +43,99 @@ const projects: Project[] = [
   },
   */
   {
+    id: 7,
+    slug: "murmur",
+    title: "Murmur",
+    description:
+      "Fast, open-source voice dictation for Windows, Linux, macOS and Android. Six merged PRs with measured gains: mean word error on a real-speech set went from 4.1% to 3.1%, and short clips go from stop to text in under 10 ms.",
+    date: "2026-09-03",
+    content: `
+<h2>What it is</h2>
+<p>Murmur is a dictation app: hold a key, talk, and clean text lands wherever your cursor is. It runs on Windows, Linux, macOS and Android, with its own site at <a href="https://murmur.techlitnow.com">murmur.techlitnow.com</a>.</p>
+<h2>Measured work</h2>
+<ul>
+  <li><strong>Speed:</strong> only the pieces that failed are redone at stop, and a timing bug that kept the fast stop off on desktop is fixed. Stopping a 25-minute dictation takes about 0.1–0.2 s of Murmur's own work, measured locally, and short clean clips go from stop to text in under 10 ms.</li>
+  <li><strong>Accuracy:</strong> fixes for cut-off endings, repetition loops and a phantom "Thank you" on Android. On a local set of 14 real dictations, mean word error went from 4.1% to 3.1%, and false sentence breaks were cut from 14 to 7.</li>
+  <li><strong>Profiles:</strong> Default, Casual, Polished or As spoken, set globally or per app, with no added stop time.</li>
+</ul>
+<p>Every change above is a merged pull request with before-and-after numbers.</p>
+    `,
+    tech: ["Kotlin", "Speech-to-text", "Desktop", "Android"],
+    github: "https://github.com/BenItBuhner/Murmur",
+    demo: "https://murmur.techlitnow.com",
+  },
+  {
+    id: 8,
+    slug: "ephemeris",
+    title: "Ephemeris",
+    description:
+      "A mission layer above Linear, Notion and meeting notes. Name a goal, and Ephemeris ties the tasks, issues, meetings and voice notes that belong to it together, each with a citation. Any agent can read and update it through one MCP tool.",
+    date: "2026-11-01",
+    content: `
+<h2>What it is</h2>
+<p>Ephemeris organizes work around <strong>missions</strong>: a named goal with a deadline, phases and steps. Voice notes from Murmur, meeting action items and new issues land in an inbox, and a triage agent proposes where each one belongs, with a citation such as "at 1:04, Sam". One tap approves it, and an approved step can become a Linear issue.</p>
+<h2>What's built</h2>
+<ul>
+  <li>Missions, phases and timeline, inbox, and a triage agent with citations</li>
+  <li>Linear write-back and a meeting-notes plane that reads Wispr Notetaker over Wispr's MCP</li>
+  <li>A <code>get_context</code> MCP server, so any agent can ask "what should I work on?" and log progress back</li>
+  <li>An <code>eph</code> CLI, a web UI, and an audit trail with undo</li>
+</ul>
+<h2>Status</h2>
+<p>The demo runs end to end and 14 end-to-end tests pass. It has been tested against a stand-in for Wispr's MCP, not yet on real Wispr or Linear accounts.</p>
+    `,
+    tech: ["TypeScript", "MCP", "Agents", "Linear API"],
+    github: "https://github.com/BenItBuhner/Ephemeris",
+    demo: null,
+  },
+  {
+    id: 9,
+    slug: "silent-lab",
+    title: "Silent Lab",
+    description:
+      "An experiment in silent input: it types trained phrases by reading lips from a camera, with no sound. Scored 96.5% on 10 trained phrases with a simulated 3D face; real-face testing is next.",
+    date: "2026-11-02",
+    content: `
+<h2>What it is</h2>
+<p>Silent Lab reads trained phrases from your lips with an ordinary camera, so you can enter text without making a sound. It also includes a head-motion bridge for Galaxy Buds 3 Pro.</p>
+<h2>Results so far</h2>
+<p>All numbers are from a <strong>simulated 3D face</strong>, five takes each:</p>
+<ul>
+  <li>10 trained phrases: 96.5%</li>
+  <li>22 trained words: 80%</li>
+  <li>Words with head movement: 68.5%</li>
+</ul>
+<p>It recognizes trained phrases only, not free dictation. Testing on a real face is the next step.</p>
+    `,
+    tech: ["Computer Vision", "Lip Reading", "TypeScript"],
+    github: "https://github.com/BenItBuhner/Ephemeris/pull/1",
+    demo: null,
+  },
+  {
+    id: 10,
+    slug: "airdrop-for-everything",
+    title: "AirDrop for Everything",
+    description:
+      "A clean-room reimplementation of the AirDrop protocol for every platform. Send and receive over AWDL (macOS, or Linux with OWL) or plain LAN.",
+    date: "2026-10-09",
+    tech: ["Rust", "Python", "Networking", "AWDL"],
+    github: "https://github.com/BenItBuhner/AirDrop-for-Everything",
+    demo: null,
+  },
+  {
+    id: 11,
+    slug: "codex-meter",
+    title: "Codex-Meter",
+    description:
+      "An easy-to-use, open-source Android client for checking and monitoring your Codex usage.",
+    date: "2026-07-11",
+    tech: ["Java", "Android"],
+    github: "https://github.com/BenItBuhner/Codex-Meter",
+    demo: null,
+  },
+  {
     id: 5,
+    slug: "model-proxy",
     title: "Model Proxy (With Claude Code)",
     description:
       "Resilient inference proxy with API key/provider/model fallbacks, optimized to plug any model into Claude Code with minimal setup.",
@@ -75,18 +167,6 @@ const projects: Project[] = [
     ],
     github: "https://github.com/BenItBuhner/model-proxy",
     demo: null,
-  },
-  {
-    id: 6,
-    title: "Cesium",
-    description:
-      "An open-source alternative to countless local and cloud agents with a Cursor-inspired design. Supports various harnesses (Cursor, Codex, OpenCode, etc.) along with its own native harness. Self-host on your own server and let tasks run while you're away, with cloud agent support via Linear and GitHub integration.",
-    date: "2025-05-01",
-    image: "/projects/cesium/cesium-teaser.jpg",
-    tech: [],
-    github: "",
-    demo: null,
-    comingSoon: true,
   },
   /*
   {
