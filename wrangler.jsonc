@@ -10,5 +10,8 @@
   },
   "services": [
     { "binding": "WORKER_SELF_REFERENCE", "service": "portfolio-site" }
+  ],
+  "routes": [
+    { "pattern": "bennett.techlitnow.com", "custom_domain": true }
   ]
 }
