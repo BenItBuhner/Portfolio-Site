@@ -10,8 +10,7 @@ export interface Project {
   demo: string | null;
   slug?: string; // optional; primary key is id for projects
   comingSoon?: boolean;
-  /** Off every public surface until a real card image exists. */
-  draft?: boolean;
+  draft?: boolean; // hide from public lists until imagery/ready
 }
 
 const projects: Project[] = [
@@ -103,6 +102,7 @@ const projects: Project[] = [
     description:
       "An experiment in silent input: it types trained phrases by reading lips from a camera, with no sound. Scored 96.5% on 10 trained phrases with a simulated 3D face; real-face testing is next.",
     date: "2026-11-02",
+    draft: true,
     content: `
 <h2>What it is</h2>
 <p>Silent Lab reads trained phrases from your lips with an ordinary camera, so you can enter text without making a sound. It also includes a head-motion bridge for Galaxy Buds 3 Pro.</p>
@@ -126,6 +126,7 @@ const projects: Project[] = [
     description:
       "A clean-room reimplementation of the AirDrop protocol for every platform. Send and receive over AWDL (macOS, or Linux with OWL) or plain LAN.",
     date: "2026-10-09",
+    draft: true,
     tech: ["Rust", "Python", "Networking", "AWDL"],
     github: "https://github.com/BenItBuhner/AirDrop-for-Everything",
     demo: null,
@@ -197,7 +198,7 @@ const projects: Project[] = [
 
 /** Public when it is not a draft or coming soon and it has a real card image. */
 export function isPublic(project: Project): boolean {
-  return project.draft !== true && project.comingSoon !== true && Boolean(project.image);
+  return !project.draft && !project.comingSoon && Boolean(project.image);
 }
 
 export function getAllProjects(): Project[] {
@@ -216,5 +217,5 @@ export function getProjectById(idOrSlug: string): Project | undefined {
 }
 
 export function getFeaturedProjects(): Project[] {
-  return projects.filter(isPublic);
+  return getAllProjects();
 }
