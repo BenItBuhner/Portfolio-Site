@@ -50,7 +50,6 @@ const projects: Project[] = [
     description:
       "Fast, open-source voice dictation for Windows, Linux, macOS and Android. Six merged PRs with measured gains: mean word error on a real-speech set went from 4.1% to 3.1%, and short clips go from stop to text in under 10 ms.",
     date: "2026-09-03",
-    draft: true,
     content: `
 <h2>What it is</h2>
 <p>Murmur is a dictation app: hold a key, talk, and clean text lands wherever your cursor is. It runs on Windows, Linux, macOS and Android, with its own site at <a href="https://murmur.techlitnow.com">murmur.techlitnow.com</a>.</p>
@@ -65,6 +64,9 @@ const projects: Project[] = [
     tech: ["Kotlin", "Speech-to-text", "Desktop", "Android"],
     github: "https://github.com/BenItBuhner/Murmur",
     demo: "https://murmur.techlitnow.com",
+    image: "/projects/murmur/murmur-card.webp",
+    draft: false,
+    comingSoon: false,
   },
   {
     id: 8,
@@ -73,7 +75,6 @@ const projects: Project[] = [
     description:
       "A mission layer above Linear, Notion and meeting notes. Name a goal, and Ephemeris ties the tasks, issues, meetings and voice notes that belong to it together, each with a citation. Any agent can read and update it through one MCP tool.",
     date: "2026-11-01",
-    draft: true,
     content: `
 <h2>What it is</h2>
 <p>Ephemeris organizes work around <strong>missions</strong>: a named goal with a deadline, phases and steps. Voice notes from Murmur, meeting action items and new issues land in an inbox, and a triage agent proposes where each one belongs, with a citation such as "at 1:04, Sam". One tap approves it, and an approved step can become a Linear issue.</p>
@@ -90,6 +91,9 @@ const projects: Project[] = [
     tech: ["TypeScript", "MCP", "Agents", "Linear API"],
     github: "https://github.com/BenItBuhner/Ephemeris",
     demo: null,
+    image: "/projects/ephemeris/ephemeris-card.webp",
+    draft: false,
+    comingSoon: false,
   },
   {
     id: 9,
@@ -134,10 +138,12 @@ const projects: Project[] = [
     description:
       "An easy-to-use, open-source Android client for checking and monitoring your Codex usage.",
     date: "2026-07-11",
-    draft: true,
     tech: ["Java", "Android"],
     github: "https://github.com/BenItBuhner/Codex-Meter",
     demo: null,
+    image: "/projects/codex-meter/codex-meter-card.webp",
+    draft: false,
+    comingSoon: false,
   },
   {
     id: 5,
@@ -190,8 +196,8 @@ const projects: Project[] = [
   */
 ];
 
-function isPublic(project: Project): boolean {
-  // Draft / no-imagery placeholders stay in source but off the live site
+/** Public when it is not a draft or coming soon and it has a real card image. */
+export function isPublic(project: Project): boolean {
   return !project.draft && !project.comingSoon && Boolean(project.image);
 }
 
@@ -201,16 +207,13 @@ export function getAllProjects(): Project[] {
 
 export function getProjectById(idOrSlug: string): Project | undefined {
   const numeric = Number(idOrSlug);
-  let project: Project | undefined;
-  if (!Number.isNaN(numeric)) {
-    project = projects.find((p) => p.id === numeric);
-  } else {
-    project = projects.find(
-      (p) =>
-        p.slug && (p.slug === idOrSlug || p.slug?.split("/").pop() === idOrSlug),
-    );
-  }
-  return project && isPublic(project) ? project : undefined;
+  const match = !Number.isNaN(numeric)
+    ? projects.find((p) => p.id === numeric)
+    : projects.find(
+        (p) =>
+          p.slug && (p.slug === idOrSlug || p.slug?.split("/").pop() === idOrSlug),
+      );
+  return match && isPublic(match) ? match : undefined;
 }
 
 export function getFeaturedProjects(): Project[] {
