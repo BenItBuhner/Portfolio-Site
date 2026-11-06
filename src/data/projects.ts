@@ -10,6 +10,7 @@ export interface Project {
   demo: string | null;
   slug?: string; // optional; primary key is id for projects
   comingSoon?: boolean;
+  draft?: boolean; // hide from public lists until imagery/ready
 }
 
 const projects: Project[] = [
@@ -49,6 +50,7 @@ const projects: Project[] = [
     description:
       "Fast, open-source voice dictation for Windows, Linux, macOS and Android. Six merged PRs with measured gains: mean word error on a real-speech set went from 4.1% to 3.1%, and short clips go from stop to text in under 10 ms.",
     date: "2026-09-03",
+    draft: true,
     content: `
 <h2>What it is</h2>
 <p>Murmur is a dictation app: hold a key, talk, and clean text lands wherever your cursor is. It runs on Windows, Linux, macOS and Android, with its own site at <a href="https://murmur.techlitnow.com">murmur.techlitnow.com</a>.</p>
@@ -71,6 +73,7 @@ const projects: Project[] = [
     description:
       "A mission layer above Linear, Notion and meeting notes. Name a goal, and Ephemeris ties the tasks, issues, meetings and voice notes that belong to it together, each with a citation. Any agent can read and update it through one MCP tool.",
     date: "2026-11-01",
+    draft: true,
     content: `
 <h2>What it is</h2>
 <p>Ephemeris organizes work around <strong>missions</strong>: a named goal with a deadline, phases and steps. Voice notes from Murmur, meeting action items and new issues land in an inbox, and a triage agent proposes where each one belongs, with a citation such as "at 1:04, Sam". One tap approves it, and an approved step can become a Linear issue.</p>
@@ -95,6 +98,7 @@ const projects: Project[] = [
     description:
       "An experiment in silent input: it types trained phrases by reading lips from a camera, with no sound. Scored 96.5% on 10 trained phrases with a simulated 3D face; real-face testing is next.",
     date: "2026-11-02",
+    draft: true,
     content: `
 <h2>What it is</h2>
 <p>Silent Lab reads trained phrases from your lips with an ordinary camera, so you can enter text without making a sound. It also includes a head-motion bridge for Galaxy Buds 3 Pro.</p>
@@ -118,6 +122,7 @@ const projects: Project[] = [
     description:
       "A clean-room reimplementation of the AirDrop protocol for every platform. Send and receive over AWDL (macOS, or Linux with OWL) or plain LAN.",
     date: "2026-10-09",
+    draft: true,
     tech: ["Rust", "Python", "Networking", "AWDL"],
     github: "https://github.com/BenItBuhner/AirDrop-for-Everything",
     demo: null,
@@ -129,6 +134,7 @@ const projects: Project[] = [
     description:
       "An easy-to-use, open-source Android client for checking and monitoring your Codex usage.",
     date: "2026-07-11",
+    draft: true,
     tech: ["Java", "Android"],
     github: "https://github.com/BenItBuhner/Codex-Meter",
     demo: null,
@@ -184,23 +190,29 @@ const projects: Project[] = [
   */
 ];
 
+function isPublic(project: Project): boolean {
+  // Draft / no-imagery placeholders stay in source but off the live site
+  return !project.draft && !project.comingSoon && Boolean(project.image);
+}
+
 export function getAllProjects(): Project[] {
-  return projects;
+  return projects.filter(isPublic);
 }
 
 export function getProjectById(idOrSlug: string): Project | undefined {
   const numeric = Number(idOrSlug);
+  let project: Project | undefined;
   if (!Number.isNaN(numeric)) {
-    return projects.find((p) => p.id === numeric);
+    project = projects.find((p) => p.id === numeric);
+  } else {
+    project = projects.find(
+      (p) =>
+        p.slug && (p.slug === idOrSlug || p.slug?.split("/").pop() === idOrSlug),
+    );
   }
-  // optional slug matching if provided in future
-  return projects.find(
-    (p) =>
-      p.slug && (p.slug === idOrSlug || p.slug?.split("/").pop() === idOrSlug),
-  );
+  return project && isPublic(project) ? project : undefined;
 }
 
 export function getFeaturedProjects(): Project[] {
-  // Return all projects as featured projects
-  return projects;
+  return getAllProjects();
 }
