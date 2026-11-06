@@ -19,10 +19,15 @@ export default function PortfolioLandingPage() {
               </div>
               <div className={`${styles.heroText} animate-fade-in-up animate-delay-400`}>
                 <h1 className={styles.title}>Hi, I&apos;m Bennett!</h1>
-                <p className={styles.subtitle}>AI Engineer, Developer, Machine Learning Enthusiast</p>
+                <p className={styles.subtitle}>Design engineer: voice, agents, and interaction craft.</p>
                 <p className={styles.description}>
-                  Pushing the boundaries of generative AI/RL, design, and tech.
-                  Building agents and tools that scale beyond imagination.
+                  I ship AI-native products end to end — measured voice pipelines, agent tooling, and UI you&apos;d actually want to use.
+                </p>
+                <p className={styles.description}>
+                  Self-taught design engineer. I build the full stack of AI-native products: capture (Murmur), missions on top of voice (Ephemeris), Codex-native tools (Codex-Meter, MCP connectors), and interaction craft (Glassé, Codex App redesign). I measure what I ship — latency, WER, honest tradeoffs — and I&apos;m looking for teams where portfolio and demos matter more than credentials. Open to SF / US remote.
+                </p>
+                <p className={styles.description}>
+                  X @BennettBuhner · GitHub BenItBuhner
                 </p>
               </div>
               <div className={`${styles.heroActions} animate-fade-in-up animate-delay-500`}>

@@ -118,7 +118,7 @@ export function WebsiteStructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Bennett Buhner - Portfolio",
-    "description": "AI Engineer, Developer, Machine Learning Enthusiast. Pushing the boundaries of generative AI/RL, design, and tech.",
+    "description": "Design engineer: voice, agents, and interaction craft. I ship AI-native products end to end — measured voice pipelines, agent tooling, and UI you'd actually want to use.",
     "url": "https://bennettbuhner.com",
     "author": {
       "@type": "Person",
@@ -156,8 +156,8 @@ export function PersonStructuredData() {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Bennett Buhner",
-    "jobTitle": "AI Engineer",
-    "description": "AI Engineer, Developer, Machine Learning Enthusiast. Pushing the boundaries of generative AI/RL, design, and tech.",
+    "jobTitle": "Design Engineer",
+    "description": "Self-taught design engineer. I build the full stack of AI-native products: capture (Murmur), missions on top of voice (Ephemeris), Codex-native tools (Codex-Meter, MCP connectors), and interaction craft (Glassé, Codex App redesign). I measure what I ship — latency, WER, honest tradeoffs — and I'm looking for teams where portfolio and demos matter more than credentials. Open to SF / US remote.",
     "url": "https://bennettbuhner.com",
     "image": "https://bennettbuhner.com/api/og/page?type=home",
     "sameAs": [

@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     default: "Bennett Buhner - Portfolio",
     template: "%s | Bennett Buhner",
   },
-  description: "AI Engineer, Developer, Machine Learning Enthusiast. Pushing the boundaries of generative AI/RL, design, and tech. Building agents and tools that scale beyond imagination.",
-  keywords: ["AI Engineer", "Machine Learning", "Developer", "Generative AI", "Reinforcement Learning", "Software Development", "Portfolio"],
+  description: "Design engineer: voice, agents, and interaction craft. I ship AI-native products end to end — measured voice pipelines, agent tooling, and UI you'd actually want to use.",
+  keywords: ["Design Engineer", "Voice", "AI Agents", "Interaction Design", "Software Development", "Portfolio"],
   authors: [{ name: "Bennett Buhner" }],
   creator: "Bennett Buhner",
   publisher: "Bennett Buhner",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Bennett Buhner - Portfolio",
-    description: "AI Engineer, Developer, Machine Learning Enthusiast. Pushing the boundaries of generative AI/RL, design, and tech.",
+    description: "Design engineer: voice, agents, and interaction craft. I ship AI-native products end to end — measured voice pipelines, agent tooling, and UI you'd actually want to use.",
     url: "https://bennettbuhner.com",
     siteName: "Bennett Buhner",
     images: [
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Bennett Buhner - Portfolio",
-    description: "AI Engineer, Developer, Machine Learning Enthusiast. Pushing the boundaries of generative AI/RL, design, and tech.",
+    description: "Design engineer: voice, agents, and interaction craft. I ship AI-native products end to end — measured voice pipelines, agent tooling, and UI you'd actually want to use.",
     images: ["/api/og/page?type=home"],
     creator: "@BennettBuhner",
   },

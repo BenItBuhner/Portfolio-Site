@@ -10,6 +10,8 @@ export interface Project {
   demo: string | null;
   slug?: string; // optional; primary key is id for projects
   comingSoon?: boolean;
+  /** Off every public surface until a real card image exists. */
+  draft?: boolean;
 }
 
 const projects: Project[] = [
@@ -63,6 +65,9 @@ const projects: Project[] = [
     tech: ["Kotlin", "Speech-to-text", "Desktop", "Android"],
     github: "https://github.com/BenItBuhner/Murmur",
     demo: "https://murmur.techlitnow.com",
+    image: "/projects/murmur/murmur-card.webp",
+    draft: false,
+    comingSoon: false,
   },
   {
     id: 8,
@@ -87,6 +92,9 @@ const projects: Project[] = [
     tech: ["TypeScript", "MCP", "Agents", "Linear API"],
     github: "https://github.com/BenItBuhner/Ephemeris",
     demo: null,
+    image: "/projects/ephemeris/ephemeris-card.webp",
+    draft: false,
+    comingSoon: false,
   },
   {
     id: 9,
@@ -132,6 +140,9 @@ const projects: Project[] = [
     tech: ["Java", "Android"],
     github: "https://github.com/BenItBuhner/Codex-Meter",
     demo: null,
+    image: "/projects/codex-meter/codex-meter-card.webp",
+    draft: false,
+    comingSoon: false,
   },
   {
     id: 5,
@@ -184,23 +195,26 @@ const projects: Project[] = [
   */
 ];
 
+/** Public when it is not a draft or coming soon and it has a real card image. */
+export function isPublic(project: Project): boolean {
+  return project.draft !== true && project.comingSoon !== true && Boolean(project.image);
+}
+
 export function getAllProjects(): Project[] {
-  return projects;
+  return projects.filter(isPublic);
 }
 
 export function getProjectById(idOrSlug: string): Project | undefined {
   const numeric = Number(idOrSlug);
-  if (!Number.isNaN(numeric)) {
-    return projects.find((p) => p.id === numeric);
-  }
-  // optional slug matching if provided in future
-  return projects.find(
-    (p) =>
-      p.slug && (p.slug === idOrSlug || p.slug?.split("/").pop() === idOrSlug),
-  );
+  const match = !Number.isNaN(numeric)
+    ? projects.find((p) => p.id === numeric)
+    : projects.find(
+        (p) =>
+          p.slug && (p.slug === idOrSlug || p.slug?.split("/").pop() === idOrSlug),
+      );
+  return match && isPublic(match) ? match : undefined;
 }
 
 export function getFeaturedProjects(): Project[] {
-  // Return all projects as featured projects
-  return projects;
+  return projects.filter(isPublic);
 }
